@@ -19,32 +19,52 @@
                 </div>
             </div>
             <!-- end page title -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-12">
+            <div class="row justify-content-left">
+                <div class="col-md-8"> {{-- Adjust width as needed --}}
                     <div class="card">
-                        <div class="mt-2 bg-white card-header">
-                            <h3>setting </h3>
-                        </div>
-                        <div class="row mb-4">
-                                <div class="col-md-3 d-flex align-items-center">
-                                    <label for="debug" class="col-form-label fw-bold mb-0">Debug</label>
+                        <div class="card-body">
+                            <div class="row align-items-center mb-3">
+                                <div class="col-md-3">
+                                    <label for="debug" class="col-form-label fw-bold fs-5">Debug</label>
                                 </div>
-                                <div class="col-md-9 d-flex align-items-center">
-                                    <div class="form-check form-switch m-0">
+                                <div class="col-md-9">
+                                    <div class="form-check form-switch">
                                         <input class="form-check-input @error('debug') is-invalid @enderror"
                                             type="checkbox"
-                                            value=""
+                                            value="{{ env('APP_DEBUG') }}"
                                             id="debug"
                                             name="debug"
-                                            />
+                                            {{ env('APP_DEBUG') == true ? 'checked' : '' }}
+                                            data-url="{{ route('setting.debug') }}" />
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
+                    </div> {{-- card-body --}}
                 </div>
-
             </div>
-        </div> <!-- container-fluid -->
-    </div>
+        </div>
+    </div> <!-- container-fluid -->
+</div>
     <!-- End Page-content -->
 @endsection
+@push('custom-script')
+<script>
+    $(document).ready(function(){
+        $("#debug").on("change", function(){
+            $.ajax({
+                url: $(this).data('url'),
+                type: "GET",
+                success: function(response){
+                    if(response.status == "t-success"){
+                        window.location.reload();
+                    }else{
+                        console.log(response);
+                    }
+                }
+            })
+        });
+    });
+</script>
+@endpush
+
