@@ -18,7 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //other setting
-Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
-Route::get('/debug', [SettingController::class, 'debug'])->name('setting.debug');
+Route::middleware('auth', 'admin')->group(function (){
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/debug', [SettingController::class, 'debug'])->name('setting.debug');
+});
+
 
 require __DIR__.'/auth.php';
