@@ -9,22 +9,22 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" key="t-menu">Menu</li>
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="{{ route('dashboard') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboard">Dashboard</span>
                     </a>
                 </li>
 
-                <!-- SMART DEVICE MENU -->
+                <!-- SETTING MENU -->
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-devices"></i>
-                        <span key="t-smart-device">Smart Device</span>
+                        <i class="bx bx-setting"></i>
+                        <span key="t-setting">Setting</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="#" class="waves-effect">
-                                <span key="t-all-device">All Device</span>
+                            <a href="{{ route('setting.index') }}" class="waves-effect">
+                                <span key="t-all-device">Other Setting</span>
                             </a>
                         </li>
                     </ul>
