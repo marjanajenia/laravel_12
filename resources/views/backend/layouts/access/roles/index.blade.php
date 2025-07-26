@@ -48,10 +48,15 @@
                                                     href="{{ route('roles.edit', $role->id) }}"
                                                     class="btn btn-sm btn-primary"><i
                                                         class="bx bx-edit-alt label-icon"></i></a>
-                                                <a href="{{ route('roles.destroy', $role->id) }}"
+                                                {{--  <a href="{{ route('roles.destroy', $role->id) }}"
                                                     title="Delete" class="btn btn-sm btn-danger" id="delete">
                                                     <i class="bx bxs-trash-alt label-icon"></i>
-                                                </a>
+                                                </a>  --}}
+                                                <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" style="border-radius: 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"> <i class="bx bxs-trash-alt label-icon"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach ()
