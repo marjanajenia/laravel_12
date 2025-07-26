@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/debug', [SettingController::class, 'debug'])->name('setting.debug');
 });
+
+//roles
+Route::resource('roles', RoleController::class);
 
 
 require __DIR__.'/auth.php';

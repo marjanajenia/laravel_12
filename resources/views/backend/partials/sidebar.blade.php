@@ -37,16 +37,17 @@
                     </ul>
                 </li>
 
-                <!-- TUTORIAL MENU -->
+                <!-- User MENU -->
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bxs-videos"></i>
-                        <span key="t-tutorial">Tutorial</span>
+                        <i class="bx bx-group"></i>
+                        <span key="t-user">User</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
                             <a href="#" class="waves-effect">
-                                <span key="t-all-tutorial">All Tutorial</span>
+                                <i class="bx bx-lock"></i>
+                                <span key="t-role">All Role</span>
                             </a>
                         </li>
                     </ul>
