@@ -10,6 +10,10 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function index(){
+        $roles= Role::orderBy('id', 'desc')->get();
+        return view('backend.layouts.access.roles.index', ['roles' => $roles]);
+    }
     public function create(){
         return view('backend.layouts.access.roles.create', ['permissions' => Permission::all()]);
     }

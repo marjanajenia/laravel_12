@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="mt-2 bg-white card-header">
                             <h3><i class="bx bx-pin text-primary"></i> All Categories
-                                <a href=""
+                                <a href="{{ route('roles.index') }}"
                                     class="btn btn-sm btn-primary waves-effect btn-label waves-light" style="float: right;"><i
                                         class="bx bx-arrow-back label-icon"></i> Back</a>
                             </h3>
