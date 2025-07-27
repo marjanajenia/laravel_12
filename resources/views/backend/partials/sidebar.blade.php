@@ -45,16 +45,17 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="#" class="waves-effect">
-                                <i class="bx bx-lock"></i>
-                                <span key="t-role">All Role</span>
+                            <a href="{{ route('roles.index') }}" class="waves-effect">
+                                <i class="bx bx-user"></i>
+                                <span key="t-role">Role</span>
                             </a>
                         </li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="#" class="waves-effect">
-                                <span key="t-create-tutorial">Create Tutorial</span>
+                            <a href="{{ route('permissions.index') }}" class="waves-effect">
+                                <i class="bx bx-shield"></i>
+                                <span key="t-role">Permission</span>
                             </a>
                         </li>
                     </ul>
