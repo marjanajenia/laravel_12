@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,7 @@ Route::middleware(['auth', 'admin'])->group(function (){
 
 //roles
 Route::resource('roles', RoleController::class);
+Route::resource('permissions', PermissionController::class);
 
 
 require __DIR__.'/auth.php';
