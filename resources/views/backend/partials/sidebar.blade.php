@@ -45,8 +45,16 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="{{ route('roles.index') }}" class="waves-effect">
+                            <a href="{{ route('users.index') }}" class="waves-effect">
                                 <i class="bx bx-user"></i>
+                                <span key="t-role">User</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('roles.index') }}" class="waves-effect">
+                                <i class="bx bx-shield"></i>
                                 <span key="t-role">Role</span>
                             </a>
                         </li>
@@ -54,7 +62,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
                             <a href="{{ route('permissions.index') }}" class="waves-effect">
-                                <i class="bx bx-shield"></i>
+                                <i class="bx bx-key"></i>
                                 <span key="t-role">Permission</span>
                             </a>
                         </li>
