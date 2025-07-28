@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Notifications\NewUserRegistered;
 
 class UserController extends Controller
 {
@@ -36,6 +37,9 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
         $user->assignRole($request->role);
+
+        $admin = User::role('admin')->first();
+        $admin->notify(new NewUserRegistered($user));
 
         return redirect()->route('users.index');
     }
@@ -70,4 +74,19 @@ class UserController extends Controller
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
+    public function show($id){
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('backend.layouts.access.user.show', compact('user', 'roles'));
+    }
+
+    public function markAsRead(Request $request)
+    {
+        $notification = auth()->user()->notifications()->find($request->id);
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        return response()->json(['status' => 'success']);
+    }
 }
+

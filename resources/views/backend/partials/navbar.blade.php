@@ -67,6 +67,29 @@
                     </a>
                 </div>
             </div>
+            <!-- notifications -->
+            <li class="dropdown d-inline-block">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                    <i class="bx bx-bell fs-5"></i>
+                    @if(auth()->user()->unreadNotifications->count())
+                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    @endif
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" id="notificationDropdown">
+                    @forelse(auth()->user()->unreadNotifications as $notification)
+                        <li>
+                            <a href="{{ route('users.show', $notification->data['user_id']) }}" class="dropdown-item notification-item" data-id="{{ $notification->id }}">
+                                {{ $notification->data['message'] }}
+                            </a>
+                        </li>
+                    @empty
+                        <li><span class="dropdown-item">No new notifications</span></li>
+                    @endforelse
+                </ul>
+            </li>
+            <!-- notifications end -->
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

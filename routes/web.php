@@ -34,6 +34,7 @@ Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
 //user
 Route::resource('users', UserController::class);
+Route::post('/notifications/mark-as-read', [UserController::class, 'markAsRead'])->name('notifications.markAsRead');
 
 
 require __DIR__.'/auth.php';

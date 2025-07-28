@@ -111,6 +111,26 @@
 <script src="{{ asset('backend') }}/assets/js/backend_custom.js"></script>
 
 @stack('custom-script')
+<script>
+    $(document).on('click', '.notification-item', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        let url = $(this).attr('href');
+
+        $.ajax({
+            url: "{{ route('notifications.markAsRead') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id
+            },
+            success: function() {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
+
 
 </body>
 
