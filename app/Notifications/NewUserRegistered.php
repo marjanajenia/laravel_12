@@ -56,7 +56,10 @@ class NewUserRegistered extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'A new user has registered: ' . $this->user->name,
+            'icon' => 'bx-user',
+            'title' => 'New user register',
+            'body' => 'A new user has registered: ' . $this->user->name,
+            'time' => now()->diffForHumans(),
             'user_id' => $this->user->id,
             'url' => route('users.show', $this->user->id),
         ];

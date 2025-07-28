@@ -68,27 +68,58 @@
                 </div>
             </div>
             <!-- notifications -->
-            <li class="dropdown d-inline-block">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <i class="bx bx-bell fs-5"></i>
-                    @if(auth()->user()->unreadNotifications->count())
-                        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                    @endif
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" id="notificationDropdown">
-                    @forelse(auth()->user()->unreadNotifications as $notification)
-                        <li>
-                            <a href="{{ route('users.show', $notification->data['user_id']) }}" class="dropdown-item notification-item" data-id="{{ $notification->id }}">
-                                {{ $notification->data['message'] }}
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="position-relative">
+                        <i class="bx bx-bell bx-tada fs-22"></i>
+
+                        @if(auth()->user()->unreadNotifications->count())
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        @endif
+                    </div>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                    <div class="p-3">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="m-0" key="t-notifications"> Notifications </h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="#!" class="small" key="t-view-all"> View All</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-simplebar style="max-height: 230px;">
+                        @forelse(auth()->user()->unreadNotifications as $notification)
+                            <a href="{{ $notification->data['url'] }}" class="text-reset notification-item notification-click" data-id="{{ $notification->id }}">
+                                <div class="d-flex">
+                                    <div class="avatar-xs me-3">
+                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                            <i class="bx {{ $notification->data['icon'] }}"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">{{ $notification->data['title'] }}</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1">{{ $notification->data['body'] }}</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i>
+                                                {{ $notification->created_at->diffForHumans() }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </a>
-                        </li>
-                    @empty
-                        <li><span class="dropdown-item">No new notifications</span></li>
-                    @endforelse
-                </ul>
-            </li>
+                        @empty
+                            <div class="text-center text-muted p-3">
+                                No new notifications
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
             <!-- notifications end -->
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
