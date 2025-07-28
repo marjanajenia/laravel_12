@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index(){
-        return view('backend.layouts.access.user.create');
+        $user = Auth::guard('web')->user();
+        $users = User::where('id', '!=', $user->id)->with('roles')->orderBy('id', 'desc')->get();
+        return view('backend.layouts.access.user.index', ['users' => $users]);
     }
     public function create(){
         return view('backend.layouts.access.user.create',[
@@ -34,5 +38,36 @@ class UserController extends Controller
         $user->assignRole($request->role);
 
         return redirect()->route('users.index');
+    }
+    public function edit($id){
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('backend.layouts.access.user.edit', compact('user', 'roles'));
+    }
+    public function update(Request $request, $id){
+        $request->validate([
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role'  => 'required|array',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name'     => $request->name,
+            'email'    => $request->email,
+        ]);
+        $user->syncRoles($request->role);
+
+        return redirect()->route('users.index');
+    }
+    public function destroy($id){
+        try{
+            $user = User::find($id);
+            $user->delete();
+            return redirect()->back()->with('success', 'User deleted successfully');
+        }catch(Exception $exception){
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
     }
 }
