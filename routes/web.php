@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MailSettingController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/debug', [SettingController::class, 'debug'])->name('setting.debug');
 });
+Route::get('/sendMail', [MailSettingController::class, 'sendMail']);
 
 //roles
 Route::resource('roles', RoleController::class);
