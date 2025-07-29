@@ -20,4 +20,7 @@ class MailSettingController extends Controller
             \Log::error('unable to send message' . $e->getMessage());
         }
     }
+    public function index(){
+        return view('backend.layouts.setting.mail_setting');
+    }
 }

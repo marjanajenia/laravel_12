@@ -29,7 +29,9 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/debug', [SettingController::class, 'debug'])->name('setting.debug');
 });
+//mail setting
 Route::get('/sendMail', [MailSettingController::class, 'sendMail']);
+Route::get('/setting/mail', [MailSettingController::class, 'index']);
 
 //roles
 Route::resource('roles', RoleController::class);
