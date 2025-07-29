@@ -21,7 +21,7 @@
                                             <label for="" class="col-sm-3 col-form-label">Receiver</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" name="receiver" id="receiver" value="{{ old('receiver') ?? '' }}" placeholder="Enter Receiver Mail Address">
-                                                @error('name')
+                                                @error('receiver')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -29,8 +29,8 @@
                                         <div class="mb-4 row">
                                             <label for="" class="col-sm-3 col-form-label">Subject</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ?? '' }}" placeholder="Enter Your Email Subject">
-                                                @error('name')
+                                                <input type="text" class="form-control" name="subject" id="subject" value="{{ old('subject') ?? '' }}" placeholder="Enter Your Email Subject">
+                                                @error('subject')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -38,8 +38,8 @@
                                         <div class="mb-4 row">
                                             <label for="" class="col-sm-3 col-form-label">Content</label>
                                             <div class="col-sm-9">
-                                                <textarea type="text" class="form-control" name="content" id="content" placeholder="Enter Your Content">{{ old('content') ?? '' }}</textarea>
-                                                 @error('content')
+                                                <textarea type="text" class="form-control" name="mail_body" id="mail_body" placeholder="Enter Your Content">{{ old('content') ?? '' }}</textarea>
+                                                 @error('mail_body')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
