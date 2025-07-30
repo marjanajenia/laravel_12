@@ -30,7 +30,7 @@ class UserController extends Controller
             'password' => 'required|min:6|confirmed',
             'role'     => 'required|array',
         ]);
-        // dd($request->all());
+
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -41,9 +41,10 @@ class UserController extends Controller
         $admin = User::role('admin')->first();
         $admin->notify(new NewUserRegistered($user));
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User created successfully');
     }
     public function edit($id){
+
         $user = User::find($id);
         $roles = Role::all();
         return view('backend.layouts.access.user.edit', compact('user', 'roles'));
@@ -63,13 +64,15 @@ class UserController extends Controller
         ]);
         $user->syncRoles($request->role);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
     public function destroy($id){
         try{
             $user = User::find($id);
             $user->delete();
+
             return redirect()->back()->with('success', 'User deleted successfully');
+
         }catch(Exception $exception){
             return redirect()->back()->with('error', $exception->getMessage());
         }
@@ -86,7 +89,10 @@ class UserController extends Controller
         if ($notification) {
             $notification->markAsRead();
         }
-        return response()->json(['status' => 'success']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'notification clear',
+        ]);
     }
 }
 

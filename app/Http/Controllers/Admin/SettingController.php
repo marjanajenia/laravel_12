@@ -24,7 +24,7 @@ class SettingController extends Controller
         Artisan::call('config:clear');
 
         return response()->json([
-            'status' => 't-success',
+            'status' => 'success',
             'message' => 'Your action was Successful',
         ], 200);
     }

@@ -48,6 +48,7 @@
 </div>
     <!-- End Page-content -->
 @endsection
+
 @push('custom-script')
 <script>
     $(document).ready(function(){
@@ -56,13 +57,14 @@
                 url: $(this).data('url'),
                 type: "GET",
                 success: function(response){
-                    if(response.status == "t-success"){
+                    if (response.status === "success"){
+                        toastr.success(response.message);
                         window.location.reload();
-                    }else{
-                        console.log(response);
+                    }else {
+                        toastr.error(response.message);
                     }
                 }
-            })
+            });
         });
     });
 </script>

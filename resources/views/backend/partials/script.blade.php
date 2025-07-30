@@ -28,45 +28,24 @@
 
 <!-- toast plugin -->
 <script src="{{ asset('backend') }}/assets/libs/toastr/build/toastr.min.js"></script>
+
 <script>
-    @if (Session::has('message'))
-        var type = "{{ Session::get('alert-type', 'info') }}"
-        switch (type) {
-            case 'info':
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-                toastr.info("{{ Session::get('message') }}")
-                break;
-            case 'success':
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-                toastr.success("{{ Session::get('message') }}")
-                break;
-            case 'warning':
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-                toastr.warning("{{ Session::get('message') }}")
-                break;
-            case 'error':
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                };
-                toastr.error("{{ Session::get('message') }}")
-                break;
-        }
+    toastr.options = {
+        "closeButton": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "5000"
+    };
+    
+    @if (session()->has('success'))
+        toastr.success("{{ session('success') }}");
+        {{ session()->forget('success') }}
+    @endif
+    @if (session()->has('error'))
+        toastr.error("{{ session('error') }}");
+        {{ session()->forget('error') }}
     @endif
 </script>
+
 
 <!-- Sweet Alerts js -->
 <script src="{{ asset('backend') }}/assets/libs/sweetalert2/sweetalert2.min.js"></script>
