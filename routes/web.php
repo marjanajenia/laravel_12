@@ -31,8 +31,9 @@ Route::middleware(['auth', 'admin'])->group(function (){
 });
 //mail setting
 Route::get('/sendMail', [MailSettingController::class, 'sendMail']);
-Route::get('/setting/mail', [MailSettingController::class, 'index']);
+Route::get('/setting/mail', [MailSettingController::class, 'index'])->name('setting.mail');
 Route::post('/setting/mailSend', [MailSettingController::class, 'send'])->name('setting.mail.send');
+Route::post('/setting/mailUpdate', [MailSettingController::class, 'update'])->name('setting.mail.update');
 
 //roles
 Route::resource('roles', RoleController::class);

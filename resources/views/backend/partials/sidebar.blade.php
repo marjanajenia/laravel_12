@@ -30,8 +30,8 @@
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="#" class="waves-effect">
-                                <span key="t-create-device">Create Device</span>
+                            <a href="{{ route('setting.mail') }}" class="waves-effect">
+                                <span key="t-all-device">Mail Setting</span>
                             </a>
                         </li>
                     </ul>
