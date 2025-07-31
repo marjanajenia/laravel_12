@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileSettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,6 +35,12 @@ Route::get('/sendMail', [MailSettingController::class, 'sendMail']);
 Route::get('/setting/mail', [MailSettingController::class, 'index'])->name('setting.mail');
 Route::post('/setting/mailSend', [MailSettingController::class, 'send'])->name('setting.mail.send');
 Route::post('/setting/mailUpdate', [MailSettingController::class, 'update'])->name('setting.mail.update');
+//profile setting
+Route::controller(ProfileSettingController::class)->group(function (){
+    Route::get('/setting/profile', 'index')->name('setting.profile');
+    Route::post('/setting/profile/update', 'updateProfile')->name('setting.profile.update');
+    Route::post('/setting/profile/update/password', 'updatePassword')->name('setting.profile.updatePassword');
+});
 
 //roles
 Route::resource('roles', RoleController::class);
