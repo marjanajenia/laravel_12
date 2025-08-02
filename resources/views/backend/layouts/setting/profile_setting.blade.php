@@ -20,8 +20,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-wrap align-items-center">
-                                <div class="profile rounded" style="width: 125px; height: 125px; overflow: hidden;">
-                                    <img src="{{ asset('default/profile.jpg') }}" alt="profile_img"
+                                <div class="profile-img-main rounded" style="width: 125px; height: 125px; overflow: hidden;">
+                                    <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('default/profile.jpg') }}" alt="profile_img"
                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                                 </div>
                                 <div class="ms-4">
@@ -130,3 +130,55 @@
     </div>
     <!-- End Page-content -->
 @endsection
+
+@push('custom-script')
+<script>
+    $(document).ready(function (){
+
+        $('#uploadImageBtn').click( function(e){
+            e.preventDefault();
+            $('#profile_picture_input').click();
+        });
+        $('#profile_picture_input').change(function(){
+            var formData = new FormData();
+            formData.append('profile_picture', $(this)[0].files[0]);
+            formData.append('_token', '{{ csrf_token() }}');
+
+            $.ajax({
+                url: "{{ route('setting.profile.updatePicture') }}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response.success){
+                         // Update the profile picture src in the profile settings page
+                        $('.profile-img-main img').attr('src', response.image_url);
+
+                        // Also update the profile picture in the header view page
+                        $('.profile-img-change').attr('src', response.image_url);
+
+                        toastr.success('Profile picture updated successfully.');
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); // See exact Laravel error
+                    toastr.error('An error occurred while updating the profile picture.');
+                }
+            });
+        });
+        // Preview image before upload
+        $('#profile_picture_input').change(function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.profile-img-main img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+
+    });
+</script>
+@endpush
+

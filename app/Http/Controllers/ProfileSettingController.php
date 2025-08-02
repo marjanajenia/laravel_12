@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileSettingController extends Controller
@@ -41,6 +43,39 @@ class ProfileSettingController extends Controller
             return redirect()->back()->with('success', 'Password updated successfully');
         } else {
             return redirect()->back()->with('error', 'Current password is incorrect');
+        }
+    }
+    public function updatePicture(Request $request){
+
+        try{
+             $request->validate([
+                'profile_picture' => 'required|image|mimes:png,jpg,gif,jpeg|max:10240',
+            ]);
+
+            $user = Auth::user();
+
+            if ($user->avatar && File::exists(public_path($user->avatar))) {
+                File::delete(public_path($user->avatar));
+            }
+
+            if ($request->hasFile('profile_picture')) {
+                $image                        = $request->file('profile_picture');
+                $imageName                    = uploadImage($image, 'users');
+                $user->avatar = $imageName;
+                $user->save();
+            }
+
+            return response()->json([
+                'success'   => true,
+                'image_url' => asset($user->avatar),
+            ]);
+        }catch (Exception $e) {
+             \Log::error('Profile picture upload failed: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+
         }
     }
 }

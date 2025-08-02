@@ -40,6 +40,7 @@ Route::controller(ProfileSettingController::class)->group(function (){
     Route::get('/setting/profile', 'index')->name('setting.profile');
     Route::post('/setting/profile/update', 'updateProfile')->name('setting.profile.update');
     Route::post('/setting/profile/update/password', 'updatePassword')->name('setting.profile.updatePassword');
+    Route::post('/setting/profile/update/picture', 'updatePicture')->name('setting.profile.updatePicture');
 });
 
 //roles
