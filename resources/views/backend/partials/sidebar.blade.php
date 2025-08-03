@@ -35,6 +35,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('setting.profile') }}" class="waves-effect">
+                                <span key="t-all-device">Profile Setting</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <!-- User MENU -->
