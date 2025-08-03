@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Blog\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSettingController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,13 @@ Route::resource('permissions', PermissionController::class);
 //user
 Route::resource('users', UserController::class);
 Route::post('/notifications/mark-as-read', [UserController::class, 'markAsRead'])->name('notifications.markAsRead');
+
+//category
+Route::controller(CategoryController::class)->prefix('blog')->group( function (){
+    Route::get('/bgcategory', 'index')->name('bg_category');
+    Route::get('/bgcategory/create', 'create')->name('bg_category.create');
+    Route::post('/bgcategory/store', 'store')->name('bg_category.store');
+});
 
 
 require __DIR__.'/auth.php';
