@@ -28,6 +28,27 @@ class CategoryController extends Controller
         ]);
         return redirect()->route('bg_category')->with('success', 'Category created');
     }
+    public function edit($id){
+        $category = BgCategory::findOrFail($id);
+        return view('backend.layouts.blog.category.edit', compact('category'));
+    }
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $category = BgCategory::findOrFail($id);
+
+        $category->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+        return redirect()->route('bg_category')->with('success', 'Category Updated');
+    }
+    public function destroy($id){
+        $category = BgCategory::where('id', $id)->delete();
+        return back()->with('error', 'category deleted');
+    }
     public function status($id){
         $category = BgCategory::findOrFail($id);
         $category->status = $category->status == 'active' ? 'inactive' : 'active';

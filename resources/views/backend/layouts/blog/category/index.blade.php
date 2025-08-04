@@ -60,14 +60,13 @@
                                             </td>
                                             <td>
                                                 <a title="Edit"
-                                                    href=""
+                                                    href="{{ route('bg_category.edit', $category->id) }}"
                                                     class="btn btn-sm btn-primary"><i
                                                         class="bx bx-edit-alt label-icon"></i></a>
-                                                <form action="" method="post" onsubmit="return confirm('Are you sure?')" style="margin: 0; padding: 0;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" style="border-radius: 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"> <i class="bx bxs-trash-alt label-icon"></i></button>
-                                                </form>
+                                                <a href="{{ route('bg_category.destroy', $category->id) }}"
+                                                    title="Delete" class="btn btn-sm btn-danger" id="delete">
+                                                    <i class="bx bxs-trash-alt label-icon"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
