@@ -28,4 +28,10 @@ class CategoryController extends Controller
         ]);
         return redirect()->route('bg_category')->with('success', 'Category created');
     }
+    public function status($id){
+        $category = BgCategory::findOrFail($id);
+        $category->status = $category->status == 'active' ? 'inactive' : 'active';
+        $category->save();
+        return back()->with('success', 'Status updated');
+    }
 }

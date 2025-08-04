@@ -56,6 +56,7 @@ Route::controller(CategoryController::class)->prefix('blog')->group( function ()
     Route::get('/bgcategory', 'index')->name('bg_category');
     Route::get('/bgcategory/create', 'create')->name('bg_category.create');
     Route::post('/bgcategory/store', 'store')->name('bg_category.store');
+    Route::get('/bgcategory/status/{id}', 'status')->name('bg_category.status');
 });
 
 

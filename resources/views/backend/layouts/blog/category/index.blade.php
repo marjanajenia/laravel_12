@@ -46,12 +46,12 @@
                                             <td>{{ $category->name }}</td>
                                             <td>
                                                 @if ($category->status == 'active')
-                                                    <a href=""
+                                                    <a href="{{ route('bg_category.status', $category->id) }}"
                                                         class="btn btn-sm btn-success waves-effect waves-light">
                                                         <i class="bx bx-like font-size-16 align-middle me-2"></i> Active
                                                     </a>
                                                 @else
-                                                    <a href=""
+                                                    <a href="{{ route('bg_category.status', $category->id) }}"
                                                         class="btn btn-sm btn-danger waves-effect waves-light">
                                                         <i class="bx bxs-dislike font-size-16 align-middle me-2"></i> In
                                                         Active
