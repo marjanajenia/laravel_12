@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSettingController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,16 @@ Route::controller(CategoryController::class)->prefix('blog')->group( function ()
     Route::patch('/bgcategory/update/{id}', 'update')->name('bg_category.update');
     Route::get('/bgcategory/destroy/{id}', 'destroy')->name('bg_category.destroy');
     Route::get('/bgcategory/status/{id}', 'status')->name('bg_category.status');
+});
+//tag
+Route::controller(TagController::class)->prefix('blog')->name('bg_tag.')->group(function (){
+    Route::get('/bgTag', 'index')->name('index');
+    Route::get('/bgTag/create', 'create')->name('create');
+    Route::post('/bgTag/store', 'store')->name('store');
+    Route::get('/bgTag/edit/{id}', 'edit')->name('edit');
+    Route::patch('/bgTag/update/{id}', 'update')->name('update');
+    Route::get('/bgTag/destroy/{id}', 'destroy')->name('destroy');
+    Route::get('/bgTag/status/{id}', 'status')->name('status');
 });
 
 
