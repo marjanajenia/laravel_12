@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="mt-2 bg-white card-header">
                             <h3>All Posts
-                                <a href="{{ route('bg_category.create') }}"
+                                <a href="{{ route('bg_post.create') }}"
                                     class="btn btn-sm btn-success waves-effect btn-label waves-light" style="float: right;"><i
                                         class="bx bx-plus-medical label-icon"></i> Create</a>
                             </h3>
@@ -34,7 +34,7 @@
                                 <thead>
                                     <tr>
                                         <td>SL</td>
-                                        <th>Name</th>
+                                        <th>Title</th>
                                         <th>Author</th>
                                         <th>Category</th>
                                         <th>status</th>
@@ -45,15 +45,17 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $post->name }}</td>
+                                            <td>{{ $post->title }}</td>
+                                            <td>{{ $post->user->name }}</td>
+                                            <td>{{ $post->bgCategory->name }}</td>
                                             <td>
                                                 @if ($post->status == 'active')
-                                                    <a href="{{ route('bg_category.status', $post->id) }}"
+                                                    <a href="{{ route('bg_post.status', $post->id) }}"
                                                         class="btn btn-sm btn-success waves-effect waves-light">
                                                         <i class="bx bx-like font-size-16 align-middle me-2"></i> Active
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('bg_category.status', $post->id) }}"
+                                                    <a href="{{ route('bg_post.status', $post->id) }}"
                                                         class="btn btn-sm btn-danger waves-effect waves-light">
                                                         <i class="bx bxs-dislike font-size-16 align-middle me-2"></i> In
                                                         Active
@@ -62,10 +64,10 @@
                                             </td>
                                             <td>
                                                 <a title="Edit"
-                                                    href="{{ route('bg_category.edit', $post->id) }}"
+                                                    href="{{ route('bg_post.edit', $post->id) }}"
                                                     class="btn btn-sm btn-primary"><i
                                                         class="bx bx-edit-alt label-icon"></i></a>
-                                                <a href="{{ route('bg_category.destroy', $post->id) }}"
+                                                <a href="{{ route('bg_post.destroy', $post->id) }}"
                                                     title="Delete" class="btn btn-sm btn-danger" id="delete">
                                                     <i class="bx bxs-trash-alt label-icon"></i>
                                                 </a>

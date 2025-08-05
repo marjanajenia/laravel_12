@@ -76,6 +76,12 @@ Route::controller(TagController::class)->prefix('blog')->name('bg_tag.')->group(
 //post
 Route::controller(PostController::class)->prefix('blog')->name('bg_post.')->group(function (){
     Route::get('/bgPost', 'index')->name('index');
+    Route::get('/bgPost/create', 'create')->name('create');
+    Route::post('/bgPost/create', 'store')->name('store');
+    Route::get('/bgPost/edit/{id}', 'edit')->name('edit');
+    Route::patch('/bgPost/update/{id}', 'update')->name('update');
+    Route::get('/bgPost/destroy/{id}', 'destroy')->name('destroy');
+    Route::get('/bgPost/status/{id}', 'status')->name('status');
 });
 
 require __DIR__.'/auth.php';
