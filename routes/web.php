@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSettingController;
@@ -72,6 +73,9 @@ Route::controller(TagController::class)->prefix('blog')->name('bg_tag.')->group(
     Route::get('/bgTag/destroy/{id}', 'destroy')->name('destroy');
     Route::get('/bgTag/status/{id}', 'status')->name('status');
 });
-
+//post
+Route::controller(PostController::class)->prefix('blog')->name('bg_post.')->group(function (){
+    Route::get('/bgPost', 'index')->name('index');
+});
 
 require __DIR__.'/auth.php';
