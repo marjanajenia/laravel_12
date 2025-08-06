@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Blog\CategoryController;
+use App\Http\Controllers\Blog\CommentController;
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\Blog\TagController;
 use App\Http\Controllers\ProfileController;
@@ -82,6 +83,10 @@ Route::controller(PostController::class)->prefix('blog')->name('bg_post.')->grou
     Route::patch('/bgPost/update/{id}', 'update')->name('update');
     Route::get('/bgPost/destroy/{id}', 'destroy')->name('destroy');
     Route::get('/bgPost/status/{id}', 'status')->name('status');
+});
+//comment
+Route::controller(CommentController::class)->prefix('blog')->name('bg_comment.')->group(function (){
+    Route::get('/bg_comment', 'index')->name('index');
 });
 
 require __DIR__.'/auth.php';
