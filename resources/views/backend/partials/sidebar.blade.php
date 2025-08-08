@@ -75,6 +75,37 @@
                         </li>
                     </ul>
                 </li>
+                <!-- Blog MENU -->
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-news"></i>
+                        <span key="t-user">Blog</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('bg_category') }}" class="waves-effect">
+                                <i class="bx bx-grid-alt"></i>
+                                <span key="t-role">Category</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('bg_post.index') }}" class="waves-effect">
+                                <i class="bx bx-file"></i>
+                                <span key="t-role">Post</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('bg_tag.index') }}" class="waves-effect">
+                                <i class="bx bx-purchase-tag"></i>
+                                <span key="t-role">Tag</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <!-- BOOKS MENU -->
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
